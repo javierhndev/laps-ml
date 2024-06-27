@@ -1,0 +1,7 @@
+ipykernel
+numpy
+pandas
+tables
+matplotlib
+scikit-learn
+torch
