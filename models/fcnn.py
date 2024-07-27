@@ -122,7 +122,8 @@ def train_fc_nn(X_train_tensor,y_train_tensor,X_test_tensor,y_test_tensor,
 	
 def make_fc_nn_prediction(nn_fc_model,y_test,X_train,device):
 	#convert input to tensor
-	y_test_tensor=torch.tensor(y_test.values,dtype=torch.float32)
+	#y_test_tensor=torch.tensor(y_test.values,dtype=torch.float32)
+	y_test_tensor=torch.tensor(y_test.to_numpy(),dtype=torch.float32)
 	y_test_tensor=y_test_tensor.to(device)
 	
 	#make prediction
