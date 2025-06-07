@@ -92,7 +92,7 @@ class FWmodelNN:
         model=perceptron_fwd(self.in_features,self.out_features)
 
         #training
-        self.nn_fc_model=train_nn(X_train_tensor,y_train_tensor,X_test_tensor,y_test_tensor,
+        self.nn_fc_model, self.train_error, self.test_error=train_nn(X_train_tensor,y_train_tensor,X_test_tensor,y_test_tensor,
 			model,self.device,n_epochs,batch_size,print_freq,learning_rate)
         
     def predict(self,X_data):
@@ -153,11 +153,11 @@ class ROUNDmodelNN:
         #training
         #train the fwd model
         print('Training the forward model')
-        self.nn_fc_model_fwd=train_nn(X_train_tensor,y_train_tensor,X_test_tensor,y_test_tensor,
+        self.nn_fc_model_fwd, self.train_error_fwd, self.test_error_fwd=train_nn(X_train_tensor,y_train_tensor,X_test_tensor,y_test_tensor,
 			model_fwd,self.device,n_epochs_fwd,batch_size_fwd,print_freq_fwd,learning_rate_fwd)
         #train the backward model  (reverse the order of the input and target)
         print('Training the backward model')
-        self.nn_fc_model_bwd=train_nn(y_train_tensor,X_train_tensor,y_test_tensor,X_test_tensor,
+        self.nn_fc_model_bwd,  self.train_error_bwd, self.test_error_bwd=train_nn(y_train_tensor,X_train_tensor,y_test_tensor,X_test_tensor,
 			model_bwd,self.device,n_epochs_bwd,batch_size_bwd,print_freq_bwd,learning_rate_bwd)
         
     def predict(self,y_data):
@@ -245,7 +245,7 @@ def train_nn(X_train_tensor,y_train_tensor,X_test_tensor,y_test_tensor,
 	endTime = time.time()
 	print("Total time taken to train the model: {:.2f}s".format(endTime - startTime))
 	
-	return nn_fc_model
+	return nn_fc_model, train_error, test_error
 	
 ##################################
 class perceptron_fwd(nn.Module):
@@ -303,7 +303,9 @@ class perceptron_bwd(nn.Module):
         return x
 
 
-#############################################	
+#############################################
+#######################################
+
 #DEPRECATED	
 def train_fc_nn(X_train_tensor,y_train_tensor,X_test_tensor,y_test_tensor,
 			device,n_epochs,batch_size,print_freq,learning_rate):
@@ -379,7 +381,7 @@ def make_fc_nn_prediction(nn_fc_model,y_test,X_train,device):
 	
 	
 	
-	
+#DEPRECATED	
 #define the neural network
 class perceptron(nn.Module):
     def __init__(self):
