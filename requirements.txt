@@ -5,3 +5,5 @@ tables
 matplotlib
 scikit-learn
 torch
+seaborn
+torchinfo
